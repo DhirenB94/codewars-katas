@@ -8,15 +8,25 @@ import "fmt"
 //Bonus: Try solving this without creating a copy of the slice.
 
 func main () {
-	fmt.Println(rotate(6, []int{1,2,3,4,5,6,7, 8 ,9, 10} ))
+	fmt.Println(rotate(2, []int{11,22,33,44,55,66} ))
 }
 
 func rotate(k int, input []int) []int  {
-	trimmedInput := input [:k]
-	input = input[k:]
 
-	for _, trim := range trimmedInput {
-		input = append(input, trim)
+	for j := 0; j <k; j++{
+
+		var i  = 0
+		var temp  = input[0] //11
+
+		for ; i < len(input) - 1; i++ {
+			input[i] = input[i+1]
+			//move everything 1 to the left
+		}
+		//[22 33 44 55 66 66]
+
+		input[i] = temp
+		//set the last index as the 0 index
+		//[22 33 44 55 66 11]
 	}
 	return input
 }
