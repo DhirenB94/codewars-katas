@@ -9,21 +9,29 @@ func main() {
 	santa(input())
 }
 
-func santa(input string) int {
+func santa(input string) (int, int) {
 	inputToArray := strings.Split(input, "")
 	floor := 0
+	enteredBasementAt := 0
+	hasSantaAlreadyBeenInTheBasement := false
 
-	for _, bracket := range inputToArray {
+	for i, bracket := range inputToArray {
 		switch bracket {
 		case "(":
 			floor++
 		case ")":
 			floor--
+			if floor == -1 && hasSantaAlreadyBeenInTheBasement == false {
+				hasSantaAlreadyBeenInTheBasement = true
+				enteredBasementAt = i + 1
+			}
 		}
 	}
 
-	fmt.Println(floor)
-	return floor
+	fmt.Println("Floor: ", floor)
+	fmt.Println("Entered basement at position", enteredBasementAt)
+
+	return floor, enteredBasementAt
 }
 
 func input() string {
