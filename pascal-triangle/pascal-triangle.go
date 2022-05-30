@@ -22,7 +22,8 @@ func pascal(rowNumber int) [][]int {
 			//sum adjacent elements from the row above and replace the zero elements
 			row[i][j] = row[i-1][j-1] + row[i-1][j]
 		}
+		fmt.Println(row[i])
 	}
-	fmt.Println(row)
+
 	return row
 }
