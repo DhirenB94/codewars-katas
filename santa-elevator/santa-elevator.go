@@ -10,12 +10,19 @@ func main() {
 }
 
 func santa(input string) int {
-	openBracket := strings.Count(input, "(")
-	closedBracket := strings.Count(input, ")")
+	inputToArray := strings.Split(input, "")
+	floor := 0
 
-	floor := openBracket - closedBracket
-	fmt.Println("Floor:", floor)
+	for _, bracket := range inputToArray {
+		switch bracket {
+		case "(":
+			floor++
+		case ")":
+			floor--
+		}
+	}
 
+	fmt.Println(floor)
 	return floor
 }
 
