@@ -21,7 +21,7 @@ func santa(input string) (int, int) {
 			floor++
 		case ")":
 			floor--
-			if floor == -1 && hasSantaAlreadyBeenInTheBasement == false {
+			if hasSantaAlreadyBeenInTheBasement == false && floor == -1 {
 				hasSantaAlreadyBeenInTheBasement = true
 				enteredBasementAt = i + 1
 			}
