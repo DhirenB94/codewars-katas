@@ -58,12 +58,8 @@ func dotSplitter(s string) (leftOfWord string, rightOfWord string) {
 	float := float64(len(s))
 	halfLength := int(math.Round(float / 2))
 
-	if halfLength%2 == 0 {
-		leftOfWord = s[0:halfLength]
-		rightOfWord = s[halfLength:]
-	} else {
-		leftOfWord = s[0:halfLength]
-		rightOfWord = s[halfLength:]
-	}
+	leftOfWord = s[0:halfLength]
+	rightOfWord = s[halfLength:]
+
 	return leftOfWord, rightOfWord
 }
