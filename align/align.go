@@ -54,7 +54,7 @@ func dots(numOfDots int) string {
 	return str.String()
 }
 
-func dotSplitter(s string) (leftOfWord string, rightOfWord string) {
+func dotSplitter(s string) (leftOfWord, rightOfWord string) {
 	float := float64(len(s))
 	halfLength := int(math.Round(float / 2))
 
