@@ -21,7 +21,6 @@ func main() {
 }
 
 func SumOfTimes(input []string) string {
-	timeArray := []time.Duration{}
 	var singleTime time.Duration
 
 	//format into time.duration
@@ -32,12 +31,10 @@ func SumOfTimes(input []string) string {
 			splitByColon = append([]string{"00"}, splitByColon...)
 		}
 		add, _ := time.ParseDuration(splitByColon[0] + "h" + splitByColon[1] + "m" + splitByColon[2] + "s")
-		timeArray = append(timeArray, add)
-	}
 
-	//add all the time.durations
-	for _, t := range timeArray {
-		singleTime = singleTime + t
+		//add all the time.durations
+		singleTime += add
+
 	}
 
 	//format back into a string
