@@ -6,86 +6,68 @@ import (
 )
 
 func main() {
-	breakIntoChange(0.13)
+	breakIntoChange(333)
 }
 
 func breakIntoChange(amount float64) map[string]float64 {
-	m := make(map[string]float64)
+	m1 := make(map[string]float64)
+	m2 := make(map[string]float64)
 
-	fiftyPounds := math.Floor(amount / 50)
-	if fiftyPounds > 0 {
-		amount = amount - fiftyPounds*50
-		m["£50"] = fiftyPounds
-	}
+	amount, fiftyPounds := divide(amount, 50)
+	m1["£50"] = fiftyPounds
 
-	twentyPounds := math.Floor(amount / 20)
-	if twentyPounds > 0 {
-		m["£20"] = twentyPounds
-		amount = amount - twentyPounds*20
-	}
+	amount, twentyPounds := divide(amount, 20)
+	m1["£20"] = twentyPounds
 
-	tenPounds := math.Floor(amount / 10)
-	if tenPounds > 0 {
-		m["£10"] = tenPounds
-		amount = amount - tenPounds*10
-	}
+	amount, tenPounds := divide(amount, 10)
+	m1["£10"] = tenPounds
 
-	fivePounds := math.Floor(amount / 5)
-	if fivePounds > 0 {
-		m["£5"] = fivePounds
-		amount = amount - fivePounds*5
-	}
+	amount, fivePounds := divide(amount, 5)
+	m1["£5"] = fivePounds
 
-	twoPounds := math.Floor(amount / 2)
-	if twoPounds > 0 {
-		m["£2"] = twoPounds
-		amount = amount - twoPounds*2
-	}
+	amount, twoPounds := divide(amount, 2)
+	m1["£2"] = twoPounds
 
-	onePound := math.Floor(amount / 1)
-	if onePound > 0 {
-		m["£1"] = onePound
-		amount = amount - onePound*1
-	}
+	amount, onePound := divide(amount, 1)
+	m1["£1"] = onePound
 
-	fiftyPence := math.Floor(amount / 0.5)
-	if fiftyPence > 0 {
-		m["50p"] = fiftyPence
-		amount = amount - fiftyPence*0.5
-	}
+	amount, fiftyPence := divide(amount, 0.5)
+	m1["50p"] = fiftyPence
 
-	twentyPence := math.Floor(amount / 0.2)
-	if twentyPence > 0 {
-		m["20p"] = twentyPence
-		amount = amount - twentyPence*0.2
-	}
+	amount, twentyPence := divide(amount, 0.2)
+	m1["20p"] = twentyPence
 
-	tenPence := math.Floor(amount / 0.1)
-	if tenPence > 0 {
-		m["10p"] = tenPence
-		amount = amount - tenPence*0.1
-	}
+	amount, tenPence := divide(amount, 0.1)
+	m1["10p"] = tenPence
 
-	fivePence := math.Floor(amount / 0.05)
-	if fivePence > 0 {
-		m["5p"] = fivePence
-		amount = amount - fivePence*0.05
-	}
+	amount, fivePence := divide(amount, 0.05)
+	m1["5p"] = fivePence
 
-	twoPence := math.Floor(amount / 0.02)
-	if twoPence > 0 {
-		m["2p"] = twoPence
-		amount = amount - twoPence*0.02
-	}
+	amount, twoPence := divide(amount, 0.02)
+	m1["2p"] = twoPence
 
 	onePence := math.Round(amount / 0.01)
 	if onePence > 0 {
-		m["1p"] = onePence
+		m1["1p"] = onePence
 		amount = amount - onePence*0.01
 	}
-	fmt.Println(m)
-	return m
 
+	for k, v := range m1 {
+		if v > 0 {
+			m2[k] = v
+		}
+	}
+
+	fmt.Println(m2)
+	return m2
+}
+
+func divide(amount, number float64) (float64, float64) {
+	dividedNum := math.Floor(amount / number)
+	if dividedNum > 0 {
+		amount = amount - dividedNum*number
+	}
+	return amount, dividedNum
 }
 
 //You're writing software for a cash machine (ATM) in the UK.
