@@ -1,6 +1,7 @@
 package main
 
 import (
+	"errors"
 	"strings"
 	"unicode"
 )
@@ -12,34 +13,47 @@ import (
 //Then, take the output of this function, combine it with this challengeToken - uopxzfve15c, in reverse order, seperated by a colon
 // eg input= fun&!! time -- output = time, final output = emit:c51evfzxpou
 
-func longestWord(input, challengeToken string) (string, string) {
-	longestWord := ""
+type wordProcesser struct {
+	longestWord string
+	finalOutput string
+}
 
-	seperatedWords := strings.Split(input, " ")
+func longestWord(input, challengeToken string) (*wordProcesser, error) {
+	if input == "" {
+		return nil, errors.New("input cannot be empty")
+	}
+
+	longestWord := ""
 	formattedWords := []string{}
 
+	seperatedWords := strings.Split(input, " ")
 	for _, sw := range seperatedWords {
 		formattedWords = append(formattedWords, removeSpecialChars(sw))
 	}
 
-	if input == "" {
-		return longestWord, ""
-	}
-
 	wordLength := 0
-
 	for _, word := range formattedWords {
 		if len(word) > wordLength {
 			wordLength = len(word)
 			longestWord = word
 		}
 	}
-
 	reversedWord := reverser(longestWord)
-	reversedToken := reverser(challengeToken)
 
+	if challengeToken == "" {
+		return &wordProcesser{
+			longestWord: longestWord,
+			finalOutput: reversedWord,
+		}, nil
+	}
+
+	reversedToken := reverser(challengeToken)
 	finalOutput := reversedWord + ":" + reversedToken
-	return longestWord, finalOutput
+
+	return &wordProcesser{
+		longestWord: longestWord,
+		finalOutput: finalOutput,
+	}, nil
 }
 
 func removeSpecialChars(chars string) string {

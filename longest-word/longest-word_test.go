@@ -8,48 +8,54 @@ import (
 
 func TestLongestWord(t *testing.T) {
 	t.Run("longest word", func(t *testing.T) {
-		t.Run("empty string passed", func(t *testing.T) {
+		t.Run("empty string passed returns an error", func(t *testing.T) {
 			input := ""
-			output, _ := longestWord(input, "")
+			output, err := longestWord(input, "")
 
-			assert.Equal(t, "", output)
+			assert.Nil(t, output)
+			assert.Error(t, err)
 		})
 		t.Run("one word passed", func(t *testing.T) {
 			input := "hello"
-			output, _ := longestWord(input, "")
+			output, err := longestWord(input, "")
 
-			assert.Equal(t, "hello", output)
+			assert.Equal(t, "hello", output.longestWord)
+			assert.NoError(t, err)
 		})
 		t.Run("more than one word passed, longest returned", func(t *testing.T) {
 			input := "Good morning"
-			output, _ := longestWord(input, "")
+			output, err := longestWord(input, "")
 
-			assert.Equal(t, "morning", output)
+			assert.Equal(t, "morning", output.longestWord)
+			assert.NoError(t, err)
 		})
 		t.Run("more than one word with the same length passed, only 1st longest returned", func(t *testing.T) {
 			input := "i love dogs "
-			output, _ := longestWord(input, "")
+			output, err := longestWord(input, "")
 
-			assert.Equal(t, "love", output)
+			assert.Equal(t, "love", output.longestWord)
+			assert.NoError(t, err)
 		})
 		t.Run("ignore punctuation to return the longest word", func(t *testing.T) {
 			input := "hello there, all good???"
-			output, _ := longestWord(input, "")
+			output, err := longestWord(input, "")
 
-			assert.Equal(t, "hello", output)
+			assert.Equal(t, "hello", output.longestWord)
+			assert.NoError(t, err)
 		})
 	})
 	t.Run("final output", func(t *testing.T) {
-		t.Run("return the longest word and the reversed longest word", func(t *testing.T) {
+		t.Run("return the longest word and the reversed longest word as the final output when no token provided", func(t *testing.T) {
 			input := "hello mate"
 
 			expectedOutput := "hello"
-			expectedFinalOutput := "olleh:"
+			expectedFinalOutput := "olleh"
 
-			output, finalOutput := longestWord(input, "")
+			output, err := longestWord(input, "")
+			assert.NoError(t, err)
 
-			assert.Equal(t, output, expectedOutput)
-			assert.Equal(t, finalOutput, expectedFinalOutput)
+			assert.Equal(t, output.longestWord, expectedOutput)
+			assert.Equal(t, output.finalOutput, expectedFinalOutput)
 		})
 		t.Run("return correct output when challenge token provided", func(t *testing.T) {
 			input := "hello mate"
@@ -58,10 +64,20 @@ func TestLongestWord(t *testing.T) {
 			expectedOutput := "hello"
 			expectedFinalOutput := "olleh:c51evfzxpou"
 
-			output, finalOutput := longestWord(input, token)
+			output, err := longestWord(input, token)
+			assert.NoError(t, err)
 
-			assert.Equal(t, output, expectedOutput)
-			assert.Equal(t, finalOutput, expectedFinalOutput)
+			assert.Equal(t, output.longestWord, expectedOutput)
+			assert.Equal(t, output.finalOutput, expectedFinalOutput)
+		})
+		t.Run("returns an error when token provided but no words", func(t *testing.T) {
+			input := ""
+			token := "uopxzfve15c"
+
+			output, err := longestWord(input, token)
+			assert.Nil(t, output)
+			assert.Error(t, err)
+			assert.ErrorContains(t, err, "input cannot be empty")
 		})
 	})
 }
