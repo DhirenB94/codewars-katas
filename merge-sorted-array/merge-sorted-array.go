@@ -9,14 +9,8 @@ package main
 // nums2 has a length of n.
 
 func merge(nums1 []int, m int, nums2 []int, n int) {
-	//since arguements in a function are copies, cannot simply do nums1=nums2 (this would only affect locally)
-	//can either change the param to be a pointer or:
-	if m == 0 {
-		copy(nums1, nums2)
-	}
-
 	endNum1Ints := m - 1
-	endNum2Ints := n - 1
+	endNum2Ints := n - 1 
 	endNum1FullArray := m + n - 1
 
 	for endNum1Ints >= 0 && endNum2Ints >= 0 {
@@ -29,6 +23,14 @@ func merge(nums1 []int, m int, nums2 []int, n int) {
 			endNum1Ints--
 			endNum1FullArray--
 		}
+	}
+
+	//If there are remaining elements in nums2, copy them into nums1
+	//if m = 0 check no longer needed now
+	for endNum2Ints >= 0 { //0
+		nums1[endNum1FullArray] = nums2[endNum2Ints]
+		endNum2Ints --
+		endNum1FullArray --
 	}
 }
 

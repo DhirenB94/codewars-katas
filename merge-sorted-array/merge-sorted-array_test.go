@@ -37,5 +37,25 @@ func TestMerge(t *testing.T) {
 
 		assert.Equal(t, []int{1}, nums1)
 	})
+	t.Run("case 4", func(t *testing.T) {
+		nums1 := []int{2,0}
+		m := 1
+		nums2 := []int{1}
+		n := 1
+
+		merge(nums1, m, nums2, n)
+
+		assert.Equal(t, []int{1,2}, nums1)
+	})
+	t.Run("case 5", func(t *testing.T) {
+		nums1 := []int{1,0}
+		m := 1
+		nums2 := []int{2}
+		n := 1
+
+		merge(nums1, m, nums2, n)
+
+		assert.Equal(t, []int{1,2}, nums1)
+	})
 
 }
