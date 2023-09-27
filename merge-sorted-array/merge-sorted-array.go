@@ -10,7 +10,7 @@ package main
 
 func merge(nums1 []int, m int, nums2 []int, n int) {
 	endNum1Ints := m - 1
-	endNum2Ints := n - 1 
+	endNum2Ints := n - 1
 	endNum1FullArray := m + n - 1
 
 	for endNum1Ints >= 0 && endNum2Ints >= 0 {
@@ -29,8 +29,8 @@ func merge(nums1 []int, m int, nums2 []int, n int) {
 	//if m = 0 check no longer needed now
 	for endNum2Ints >= 0 { //0
 		nums1[endNum1FullArray] = nums2[endNum2Ints]
-		endNum2Ints --
-		endNum1FullArray --
+		endNum2Ints--
+		endNum1FullArray--
 	}
 }
 
