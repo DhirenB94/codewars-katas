@@ -1,27 +1,25 @@
 package main
 
-type duplicate struct {
-	presentOnce  bool
-	presentTwice bool
-}
+// Given an integer array nums sorted in non-decreasing order, remove some duplicates in-place such that each unique element appears at most twice.
+// The relative order of the elements should be kept the same.
+// If there are k elements after removing the duplicates, then the first k elements of nums should hold the final result. It does not matter what you leave beyond the first k elements.
+// Return k after placing the final result in the first k slots of nums.
+
+// Do not allocate extra space for another array. You must do this by modifying the input array in-place with O(1) extra memory.
 
 func removeDuplicate(nums []int) int {
-	uniqueChecker := make(map[int]duplicate)
+	uniqueChecker := make(map[int]string)
 	result := []int{}
 
 	for _, num := range nums {
-		value := uniqueChecker[num]
-		if value.presentOnce && !value.presentTwice {
+		if uniqueChecker[num] == "once" {
 			result = append(result, num)
-			value.presentTwice = true
+			uniqueChecker[num] = "twice"
 		}
-		if !value.presentOnce && !value.presentTwice {
+		if uniqueChecker[num] == "" {
 			result = append(result, num)
-			value.presentOnce = true
+			uniqueChecker[num] = "once"
 		}
-		//When you update the value inside the map, you need to assign it back to the map.
-		//Maps in Go are passed by reference, so you need to reassign the updated value back to the map.
-		uniqueChecker[num] = value
 	}
 
 	for i := 0; i < len(result); i++ {
