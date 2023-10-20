@@ -5,25 +5,42 @@
 package main
 
 func isSubsequence(s string, t string) bool {
+	// In this code, we use two pointers i and j to iterate through the strings s and t.
+	// The idea is to compare characters in both strings, advancing i when a match is found.
+	// If i reaches the length of s, it means that we have successfully found all characters of s in the same relative order within t, and we return true. Otherwise, we return false.
+	i, j := 0, 0
 
-	count := 0
-	indexPosT := -1
-
-	for _, valueS := range s {
-		for indexT, valueT := range t {
-			if valueS == valueT && indexT > indexPosT {
-				count++
-				indexPosT = indexT
-				break
-			}
+	for i < len(s) && j < len(t) {
+		if s[i] == t[j] {
+			i++
 		}
+		j++
 	}
 
-	if count == len(s) {
-		return true
-	}
+	return i == len(s)
 
-	return false
+
+
+	//Other Solution
+	
+	// count := 0
+	// indexPosT := -1
+
+	// for _, valueS := range s {
+	// 	for indexT, valueT := range t {
+	// 		if valueS == valueT && indexT > indexPosT {
+	// 			count++
+	// 			indexPosT = indexT
+	// 			break
+	// 		}
+	// 	}
+	// }
+
+	// if count == len(s) {
+	// 	return true
+	// }
+
+	// return false
 }
 
 //Sudocode
