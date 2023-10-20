@@ -7,24 +7,37 @@ package main
 // The tests are generated such that there is exactly one solution. You may not use the same element twice.
 // Your solution must use only constant extra space.
 
-func main() {
-
-}
-
 func twoSum(numbers []int, target int) []int {
 
-	sumNumbers := []int{}
+	//a better solution
+	left, right := 0, len(numbers)-1
 
-	for i := 0; i < len(numbers)-1; i++ {
-		for j := i + 1; j < len(numbers); j++ {
-			if numbers[i]+numbers[j] == target {
-				sumNumbers = append(sumNumbers, i+1, j+1)
-				return sumNumbers
-			}
+	for left < right {
+		sum := numbers[left] + numbers[right]
+		if sum == target {
+			return []int{left + 1, right + 1} // Adding 1 to convert to 1-indexed
+		} else if sum < target {
+			left++
+		} else {
+			right--
 		}
 	}
 
-	return sumNumbers
+	// No solution found, return an empty array
+	return []int{}
+
+	// sumNumbers := []int{}
+
+	// for i := 0; i < len(numbers)-1; i++ {
+	// 	for j := i + 1; j < len(numbers); j++ {
+	// 		if numbers[i]+numbers[j] == target {
+	// 			sumNumbers = append(sumNumbers, i+1, j+1)
+	// 			return sumNumbers
+	// 		}
+	// 	}
+	// }
+
+	// return sumNumbers
 }
 
 //sudocode
