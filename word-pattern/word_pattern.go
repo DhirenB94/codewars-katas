@@ -11,10 +11,6 @@ import (
 	"strings"
 )
 
-func main() {
-	wordPattern("abba", "dog cat cat dog")
-}
-
 func wordPattern(pattern string, s string) bool {
 	pToS := make(map[byte]string)
 	sToP := make(map[string]byte)

@@ -6,7 +6,6 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-
 func Test(t *testing.T) {
 	t.Run("case 1", func(t *testing.T) {
 		output := wordPattern("abba", "dog cat cat dog")
