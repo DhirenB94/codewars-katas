@@ -15,20 +15,20 @@ func main() {
 
 func removeDuplicate(nums []int) int {
 	unique := make(map[int]bool)
-	reuslt := []int{}
+	result := []int{}
 
 	for _, num := range nums {
 		if !unique[num] {
 			unique[num] = true
-			reuslt = append(reuslt, num)
+			result = append(result, num)
 		}
 	}
 
-	for i := 0; i < len(reuslt); i++ {
-		nums[i] = reuslt[i]
+	for i := 0; i < len(result); i++ {
+		nums[i] = result[i]
 	}
 
-	uniqueInNums := nums[:len(reuslt)]
+	uniqueInNums := nums[:len(result)]
 	uniqueNums := len(uniqueInNums)
 
 	return uniqueNums

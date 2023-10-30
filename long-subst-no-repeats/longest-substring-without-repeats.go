@@ -24,7 +24,6 @@ func longSub(substr string) int {
 		} else {
 			hashMap = make(map[rune]int)
 			hashMap[v]++
-			fmt.Println(streak)
 			if streak > longestStreak {
 				longestStreak = streak
 			}

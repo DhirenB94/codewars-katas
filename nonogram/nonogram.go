@@ -15,7 +15,7 @@ func nonogram(binaryArray []int) []int {
 		if number == 0 {
 			mapKey++
 		} else {
-			m[mapKey] += 1
+			m[mapKey] ++
 		}
 	}
 	for _, consec := range m {

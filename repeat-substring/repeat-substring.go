@@ -2,7 +2,7 @@ package main
 
 //Create a function repeatString(str)
 // It should takes the parameter being passed and determines if there is some substring K that can be repeated N > 1 times to produce the input string exactly as it appears
-// Your function should return the longest substring K, and if there is none it shoudl return the string -1
+// Your function should return the longest substring K, and if there is none it should return the string -1
 // e.g "abcabcabcabc" should return "abcabc" but "abcabcabc" should return "abc"
 //If the input string only contains 1 character then your program should return the string -1
 

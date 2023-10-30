@@ -9,7 +9,7 @@ func main() {
 }
 
 // this soltution 0(n) for time and complexity as its dependent on the length of the array
-// space is 0(n) because the map size is deendent on the array size
+// space is 0(n) because the map size is dependent on the array size
 func majorityElement(nums []int) int {
 
 	majority := (len(nums) / 2)
@@ -17,9 +17,7 @@ func majorityElement(nums []int) int {
 	elementCount := make(map[int]int)
 
 	for _, num := range nums {
-		count := elementCount[num]
-		count++
-		elementCount[num] = count
+		 elementCount[num]++
 	}
 
 	for key, ec := range elementCount {
@@ -34,7 +32,7 @@ func majorityElement(nums []int) int {
 //Boyer-Moore Voting Algorithm.
 
 //Time is still 0(n) as we have to loop through the array of size n
-// but space is 0(1) because it ses only two variables: candidate and count.
+// but space is 0(1) because it only has two variables: candidate and count.
 // These variables do not depend on the size of the input array.
 // They remain constant regardless of the input size.
 
