@@ -1,65 +1,82 @@
 package main
 
 import (
-	"fmt"
 	"math"
 )
 
 func main() {
-	breakIntoChange(333)
+	breakIntoChange(0.03)
 }
 
 func breakIntoChange(amount float64) map[string]float64 {
 	m1 := make(map[string]float64)
-	m2 := make(map[string]float64)
+	//m2 := make(map[string]float64)
 
-	amount, fiftyPounds := divide(amount, 50)
-	m1["£50"] = fiftyPounds
-
-	amount, twentyPounds := divide(amount, 20)
-	m1["£20"] = twentyPounds
-
-	amount, tenPounds := divide(amount, 10)
-	m1["£10"] = tenPounds
-
-	amount, fivePounds := divide(amount, 5)
-	m1["£5"] = fivePounds
-
-	amount, twoPounds := divide(amount, 2)
-	m1["£2"] = twoPounds
-
-	amount, onePound := divide(amount, 1)
-	m1["£1"] = onePound
-
-	amount, fiftyPence := divide(amount, 0.5)
-	m1["50p"] = fiftyPence
-
-	amount, twentyPence := divide(amount, 0.2)
-	m1["20p"] = twentyPence
-
-	amount, tenPence := divide(amount, 0.1)
-	m1["10p"] = tenPence
-
-	amount, fivePence := divide(amount, 0.05)
-	m1["5p"] = fivePence
-
-	amount, twoPence := divide(amount, 0.02)
-	m1["2p"] = twoPence
-
-	onePence := math.Round(amount / 0.01)
-	if onePence > 0 {
-		m1["1p"] = onePence
-		amount = amount - onePence*0.01
+	amount, maxDivisibleAmount := divide(amount, 50)
+	if maxDivisibleAmount != 0 {
+		m1["£50"] = maxDivisibleAmount
 	}
 
-	for k, v := range m1 {
-		if v > 0 {
-			m2[k] = v
-		}
+	amount, maxDivisibleAmount = divide(amount, 20)
+	if maxDivisibleAmount != 0 {
+		m1["£20"] = maxDivisibleAmount
 	}
 
-	fmt.Println(m2)
-	return m2
+	amount, maxDivisibleAmount = divide(amount, 10)
+	if maxDivisibleAmount != 0 {
+		m1["£10"] = maxDivisibleAmount
+	}
+
+	amount, maxDivisibleAmount = divide(amount, 5)
+	if maxDivisibleAmount != 0 {
+		m1["£5"] = maxDivisibleAmount
+	}
+
+	amount, maxDivisibleAmount = divide(amount, 2)
+	if maxDivisibleAmount != 0 {
+		m1["£2"] = maxDivisibleAmount
+	}
+
+	amount, maxDivisibleAmount = divide(amount, 1)
+	if maxDivisibleAmount != 0 {
+		m1["£1"] = maxDivisibleAmount
+	}
+
+	amount, maxDivisibleAmount = divide(amount, 0.5)
+	if maxDivisibleAmount != 0 {
+		m1["50p"] = maxDivisibleAmount
+	}
+
+	amount, maxDivisibleAmount = divide(amount, 0.2)
+	if maxDivisibleAmount != 0 {
+		m1["20p"] = maxDivisibleAmount
+	}
+
+	amount, maxDivisibleAmount = divide(amount, 0.1)
+	if maxDivisibleAmount != 0 {
+		m1["10p"] = maxDivisibleAmount
+	}
+
+	amount, maxDivisibleAmount = divide(amount, 0.05)
+	if maxDivisibleAmount != 0 {
+		m1["5p"] = maxDivisibleAmount
+	}
+
+	amount, maxDivisibleAmount = divide(amount, 0.02)
+	if maxDivisibleAmount != 0 {
+		m1["2p"] = maxDivisibleAmount
+	}
+
+	if amount <= 0.01 {
+		m1["1p"]++
+	}
+
+	// for k, v := range m1 {
+	// 	if v > 0 {
+	// 		m2[k] = v
+	// 	}
+	// }
+	return m1
 }
 
 func divide(amount, number float64) (float64, float64) {

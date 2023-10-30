@@ -17,6 +17,7 @@ func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
 	listOneStr := ""
 	listTwoStr := ""
 
+	//get all the values of the list and convert to a string in reverse order
 	for l1 != nil {
 		listOneStr = strconv.Itoa(l1.Val) + listOneStr
 		l1 = l1.Next
@@ -27,9 +28,12 @@ func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
 		l2 = l2.Next
 	}
 
-	list := add(listOneStr, listTwoStr)
 
-	var head, current *ListNode
+	list := add(listOneStr, listTwoStr)
+	//at this point we have a int array in the correct order we want (reversed)
+
+	//create a LL using an array
+	var head, tail *ListNode
 
 	for _, v := range list {
 		newNode := &ListNode{
@@ -39,10 +43,10 @@ func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
 
 		if head == nil {
 			head = newNode
-			current = head
+			tail = newNode
 		} else {
-			current.Next = newNode
-			current = newNode
+			tail.Next = newNode
+			tail = newNode
 		}
 	}
 
@@ -60,7 +64,7 @@ func add(str1, str2 string) []int {
 	}
 
 	intListReversed := []int{}
-
+	//splitting an int to []int{} in this way will give us the int in revers order, for this use case this is what we want.
 	for total > 0 {
 		modulus := total % 10
 		intListReversed = append(intListReversed, modulus)

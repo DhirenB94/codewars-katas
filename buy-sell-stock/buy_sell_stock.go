@@ -22,4 +22,5 @@ func maxProfit(prices []int) int {
 }
 
 //Sudocode
-//Find the highest difference in the array, where the 1st number in the differnce is less than the second number
+//Find the highest difference in the array, where the 1st number in the difference is less than the second number (buy for low, sell for higher)
+//The second number also has to be after the 1st

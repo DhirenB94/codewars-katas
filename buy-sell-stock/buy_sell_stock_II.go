@@ -13,6 +13,5 @@ func maxProfit2(prices []int) int {
 			maxProfit += prices[i] - prices[i-1]
 		}
 	}
-
 	return maxProfit
 }

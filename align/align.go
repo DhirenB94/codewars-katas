@@ -2,8 +2,6 @@ package main
 
 import (
 	"fmt"
-	"math"
-	"strings"
 )
 
 //Align (left/right/centre) a string within a given width.
@@ -37,8 +35,8 @@ func align(word string, width int, direction string) string {
 	case "R":
 		alignedString = totalDots + word
 	case "C":
-		leftOfWord, rightOfWord := dotSplitter(totalDots)
-		alignedString = leftOfWord + word + rightOfWord
+		fewerDots, moreDots := dotSplitter(totalDots)
+		alignedString = moreDots + word + fewerDots
 
 	}
 	fmt.Println(alignedString)
@@ -46,20 +44,32 @@ func align(word string, width int, direction string) string {
 
 }
 
+// dots will return x number of dots as a string e.g 5 = "....."
 func dots(numOfDots int) string {
-	var str strings.Builder
+	dots := ""
 	for i := 0; i < numOfDots; i++ {
-		str.WriteString(".")
+		dots = dots + "."
 	}
-	return str.String()
+	return dots
+
+	// var str strings.Builder
+	// for i := 0; i < numOfDots; i++ {
+	// 	str.WriteString(".")
+	// }
+	// return str.String()
 }
 
-func dotSplitter(s string) (leftOfWord, rightOfWord string) {
-	float := float64(len(s))
-	halfLength := int(math.Round(float / 2))
+func dotSplitter(s string) (fewerDots, moreDots string) {
+	halfLength := len(s) / 2
+	//rounds down if a decimal eg 4/2 = 2 and 5/2 =2
 
-	leftOfWord = s[0:halfLength]
-	rightOfWord = s[halfLength:]
+	//you want less[x:y] = numbers from x to y but NOT including y
+	fewerDots = s[0:halfLength]
+	//more on the left [y:] INCLUDING y till the end
+	moreDots = s[halfLength:]
+	//they will be the same in the case of an even number
 
-	return leftOfWord, rightOfWord
+	// float := float64(len(s))
+	// halfLength := int(math.Round(float / 2))
+	return fewerDots, moreDots
 }
