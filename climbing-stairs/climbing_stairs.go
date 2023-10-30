@@ -7,13 +7,10 @@ func main() {
 }
 
 func climbStairs(n int) int {
-	if n < 0 {
-		return 0
-	}
 	if n <= 2 {
 		return n
 	}
-	stairCombos := []int{0, n - (n - 1), n - (n - 2)}
+	stairCombos := []int{0, 1, 2}
 
 	for i := 1; i < n-1; i++ {
 		stairCombos = append(stairCombos, stairCombos[i]+stairCombos[i+1])
@@ -31,6 +28,7 @@ func climbStairs(n int) int {
 //     }
 
 //     // Create an array to store the number of ways to reach each step.
+//	   // We need to keep a reference of the values one and 2 before as the sum of this will gicve us the combinations for current number
 //     dp := make([]int, n+1)
 //     dp[1] = 1
 //     dp[2] = 2

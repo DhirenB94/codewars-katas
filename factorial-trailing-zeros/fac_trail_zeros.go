@@ -1,7 +1,9 @@
 package main
 
+import "fmt"
+
 func main() {
-	_ = trailingZeroes(11)
+	_ = trailingZeroes(25)
 
 }
 
@@ -12,6 +14,6 @@ func trailingZeroes(n int) int {
 		count += n
 
 	}
-
+	fmt.Println(count)
 	return count
 }

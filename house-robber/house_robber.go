@@ -2,7 +2,7 @@ package main
 
 func main() {
 	rob([]int{1, 34, 42, 4, 9})
-}
+}		
 
 func rob(nums []int) int {
 	n := len(nums)
